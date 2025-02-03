@@ -25,12 +25,12 @@ class Chat:
 
       forecast = []
       i=0
-      while(len(forecast)):  # Next 3 hours
+      while(len(forecast) < 3):  # Next 3 hours
         forecast_time = wd["hourly"]["time"][i]
         forecast_temp = wd["hourly"]["temperature_2m"][i]
         
         # Add the formatted forecast to the list
-        if(forecast_time > current_time):
+        if(datetime.fromisoformat(forecast_time) > datetime.fromisoformat(current_time)):
           forecast.append(f"At {forecast_time}, temperature: {forecast_temp}°C")
         i += 1
       # Construct the response
