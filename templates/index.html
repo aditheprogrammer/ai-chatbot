@@ -1,27 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat App</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: black;}
-        #chat-box { width: 1000px; height: 500px; border: 1px solid #ccc; overflow-y: auto; margin: 10px auto; padding: 10px; }
-        #message { width: 500px; }
-        .message { text-align: left; margin: 5px; padding: 5px; border-radius: 5px; }
-        .user { background-color: #d1e7dd; }
-        .bot { background-color: #f8d7da; text-align: right; }
-        h2 {color: white;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat App</title>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+
+  <style>
+      body { 
+          font-family: "Comic Sans MS", cursive, sans-serif; 
+          text-align: center; 
+          background-color: #121212; 
+          color: white;
+      }
+      h2 { color: #4caf50; } 
+        /* Chat Box */
+        #chat-box { 
+            width: 80%; 
+            max-width: 800px; 
+            height: 500px; 
+            border: 2px solid #444; 
+            overflow-y: auto; 
+            margin: 20px auto; 
+            padding: 10px; 
+            background: #1e1e1e;
+            border-radius: 10px;
+        }
+
+        /* Input & Button Container */
+        .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            gap: 10px;
+        }
+
+        #message { 
+            font-family: "Comic Sans MS", cursive, sans-serif; 
+            width: 60%; 
+            padding: 10px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            background: #333; 
+            color: white; 
+        }
+        
+        button {
+            background-color: #4caf50; /* Green */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        button i { font-size: 18px; }
+        
+        button:hover { background-color: #45a049; }
+
+        /* Chat Messages */
+        .message { 
+            padding: 10px; 
+            margin: 10px; 
+            border-radius: 8px; 
+            max-width: 75%; 
+            word-wrap: break-word;
+        }
+        
+        .user { 
+            background-color: #d1e7dd; /* Green for user messages */
+            color: rgb(0, 0, 0); 
+            text-align: left; 
+            margin-left: auto;
+        }
+
+        .bot { 
+            background-color:#f8d7da; text-align: right; 
+            color: rgb(0, 0, 0); 
+            text-align: right; 
+            margin-right: auto;
+        }
     </style>
 </head>
 <body>
-    <h2>Simple Chat App</h2>
+    <h2>Sliced Mango</h2>
     <div id="chat-box"></div>
-    <input type="text" id="message" placeholder="Type a message...">
-    <button onclick="sendMessage()">Send</button>
+
+    <div class="input-container">
+        <input type="text" id="message" placeholder="Type a message...">
+        <button onclick="sendMessage()">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
 
     <script>
-        const API_URL = "http://127.0.0.1:5000/chat"; // Replace with your API URL
+        const API_URL = "http://127.0.0.1:5000/chat"; 
 
         function sendMessage() {
             let msg = document.getElementById("message").value;
@@ -38,13 +120,10 @@
                 if (!response.ok) {
                     throw new Error("Unauthorized: Invalid API key");
                 }
-                return response.json();  // Parse JSON only if the response is OK
+                return response.json(); 
             })
             .then(data => addMessage(data.response, "bot"))
             .catch(err => addMessage("You have to have a real account first!", "bot"));
-            //.then(response => response.json())
-            //.then(response.status==200 ? data => addMessage(data.response, "bot") : data => addMessage("You have to have a real account first!", "bot"))
-            //.catch(err => console.error("Error:", err));
 
             document.getElementById("message").value = "";
         }
