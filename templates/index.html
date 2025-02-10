@@ -14,85 +14,105 @@
           text-align: center; 
           background-color: #121212; 
           color: white;
+          transition: background 0.3s, color 0.3s;
       }
       h2 { color: #4caf50; } 
-        /* Chat Box */
-        #chat-box { 
-            width: 80%; 
-            max-width: 800px; 
-            height: 500px; 
-            border: 2px solid #444; 
-            overflow-y: auto; 
-            margin: 20px auto; 
-            padding: 10px; 
-            background: #1e1e1e;
-            border-radius: 10px;
-        }
 
-        /* Input & Button Container */
-        .input-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 10px;
-            gap: 10px;
-        }
+      /* Light Mode */
+      .light-mode {
+          background-color: white;
+          color: black;
+      }
+      .light-mode h2 { color: #2e7d32; }
+      .light-mode #chat-box { background: #f1f1f1; border-color: #ddd; }
+      .light-mode #message { background: #ddd; color: black; }
+      .light-mode .user { background-color: #4caf50; color: white; }
+      .light-mode .bot { background-color: #f0b3b3; color: black; } 
+      .light-mode button { background-color: #2e7d32; }
 
-        #message { 
-            font-family: "Comic Sans MS", cursive, sans-serif; 
-            width: 60%; 
-            padding: 10px; 
-            border: none; 
-            border-radius: 5px; 
-            font-size: 16px; 
-            background: #333; 
-            color: white; 
-        }
-        
-        button {
-            background-color: #4caf50; /* Green */
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        button i { font-size: 18px; }
-        
-        button:hover { background-color: #45a049; }
+      /* Chat Box */
+      #chat-box { 
+          width: 80%; 
+          max-width: 800px; 
+          height: 500px; 
+          border: 2px solid #444; 
+          overflow-y: auto; 
+          margin: 20px auto; 
+          padding: 10px; 
+          background: #1e1e1e;
+          border-radius: 10px;
+      }
 
-        /* Chat Messages */
-        .message { 
-            padding: 10px; 
-            margin: 10px; 
-            border-radius: 8px; 
-            max-width: 75%; 
-            word-wrap: break-word;
-        }
-        
-        .user { 
-            background-color: #d1e7dd; /* Green for user messages */
-            color: rgb(0, 0, 0); 
-            text-align: left; 
-            margin-left: auto;
-        }
+      /* Input & Button Container */
+      .input-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 10px;
+          gap: 10px;
+      }
 
-        .bot { 
-            background-color:#f8d7da; text-align: right; 
-            color: rgb(0, 0, 0); 
-            text-align: right; 
-            margin-right: auto;
-        }
-    </style>
+      #message { 
+          font-family: "Comic Sans MS", cursive, sans-serif; 
+          width: 60%; 
+          padding: 10px; 
+          border: none; 
+          border-radius: 5px; 
+          font-size: 16px; 
+          background: #333; 
+          color: white; 
+      }
+      
+      button {
+          background-color: #4caf50;
+          color: white;
+          border: none;
+          padding: 10px 15px;
+          cursor: pointer;
+          font-size: 16px;
+          border-radius: 5px;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          transition: background 0.3s;
+      }
+      
+      button i { font-size: 18px; }
+      button:hover { background-color: #45a049; }
+
+      /* Chat Messages */
+      .message { 
+          padding: 10px; 
+          margin: 10px; 
+          border-radius: 8px; 
+          max-width: 75%; 
+          word-wrap: break-word;
+      }
+      
+      .user { background-color: #d1e7dd; color: black; text-align: left; margin-left: auto; }
+      .bot { background-color: #f0b3b3; color: black; text-align: right; margin-right: auto; }
+
+      /* Toggle Button */
+      .toggle-btn {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: #444;
+          color: white;
+          padding: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          border: none;
+      }
+      .toggle-btn:hover { background: #555; }
+  </style>
 </head>
 <body>
     <h2>Sliced Mango</h2>
+    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Mode</button>
+    
+
     <div id="chat-box"></div>
 
     <div class="input-container">
@@ -135,6 +155,10 @@
             msgDiv.textContent = text;
             chatBox.appendChild(msgDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("light-mode");
         }
     </script>
 </body>
