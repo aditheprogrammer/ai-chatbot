@@ -7,3 +7,7 @@ chatbot_env/
 .git/
 .git/objects/pack
 some_useless
+__pycache__
+__pycache__/
+__pycache__/*
+__pycache__/*/*
