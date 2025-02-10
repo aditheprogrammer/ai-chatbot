@@ -223,7 +223,7 @@
 
     <!-- Input & Send Button -->
     <div class="input-container">
-        <input type="text" id="message" placeholder="Type a message...">
+        <input type="text" id="message" placeholder="Type a message..." onkeypress="if(event.key=='Enter'){sendMessage();}">
         <button class="send-btn" onclick="sendMessage()">
             <i class="fas fa-paper-plane"></i>
         </button>
