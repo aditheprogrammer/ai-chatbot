@@ -123,7 +123,7 @@
       button i { font-size: 18px; }
       button:hover { background-color: #45a049; }
 
-      /* Chat Messages */
+/* Chat Messages */
       .message { 
           padding: 10px 18px; 
           margin: 8px 0; 
@@ -134,8 +134,19 @@
           line-height: 1.5;
       }
 
-      .user { background-color: #4caf50; color: white; text-align: left; margin-left: auto; }
-      .bot { background-color: #f0b3b3; color: black; text-align: right; margin-right: auto; }
+      .user { 
+          background-color: #4caf50; 
+          color: white; 
+          text-align: right; /* User's messages aligned to the right */
+          margin-left: auto; /* Aligns the message to the right */
+      }
+
+      .bot { 
+          background-color: #f0b3b3; 
+          color: black; 
+          text-align: left; /* Bot's messages aligned to the left */
+          margin-right: auto; /* Aligns the message to the left */
+      }
 
       /* Sun & Moon Toggle Button */
       .toggle-btn {
@@ -289,11 +300,18 @@
             let chatBox = document.getElementById("chat-box");
             let msgDiv = document.createElement("div");
             msgDiv.className = `message ${sender}`;
-            msgDiv.textContent = text;
             chatBox.appendChild(msgDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
-
-            if (save) saveChatHistory();
+            //if (save) saveChatHistory();
+            let i = 0;
+            let interval = setInterval(function() {
+                msgDiv.textContent += text.charAt(i);
+                i++;
+                if (i === text.length) {
+                    clearInterval(interval);
+                    if (save) saveChatHistory();
+                }
+            }, 25); // Adjust this number for the typing speed
         }
 
         function toggleDarkMode() {
