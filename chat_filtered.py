@@ -5,7 +5,7 @@ from weather_chat import chatWeather
 import json
 from datetime import datetime, timedelta
 
-class Chat:
+class Chatfiltered:
   def __init__(self):
     self.guard = Guard().use(ProfanityFree())
     self.messages=[]
@@ -54,4 +54,3 @@ class Chat:
         bot_response = "Sorry but I cant talk about that."
     self.messages.append({"role": "assistant", "content": bot_response})
     return (bot_response)
-

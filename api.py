@@ -2,7 +2,7 @@ import os
 import json
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-from chat_filtered import Chat
+from chat_medical import Chat
 
 app = Flask(__name__)
 CORS(app)
@@ -45,30 +45,6 @@ def chat_response():
     r = chat.ans(data["query"])
     return jsonify({"response": r}), 200
 
-
-    # Get the chat history
-    chat_history = load_chat_history()
-
-    # Get the user's query
-    data = request.get_json()
-    query = data.get("query")
-    if not query:
-        return jsonify({"error": "No query provided"}), 400
-
-    # Add the user's message to the chat history
-    chat_history.append({"sender": "user", "message": query})
-
-    # Generate bot's response
-    response = chat.ans(query)
-
-    # Add bot's response to the chat history
-    chat_history.append({"sender": "bot", "message": response})
-
-    # Save the updated chat history to the file
-    save_chat_history(chat_history)
-
-    # Return the conversation history (including the new response)
-    return jsonify({"chat_history": chat_history}), 200
 
 if __name__ == "__main__":
     app.run(debug=True)
